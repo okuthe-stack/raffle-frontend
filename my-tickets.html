@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Tickets</title>
+
+<style>
+
+body{
+    background:#0a0a0a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+
+h1{
+    color:gold;
+}
+
+
+input{
+
+    padding:12px;
+    width:250px;
+    border-radius:8px;
+    border:none;
+
+}
+
+
+button{
+
+    margin-top:15px;
+    padding:12px 25px;
+    background:gold;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+
+}
+
+
+.ticket{
+
+    background:#151515;
+    margin:20px auto;
+    padding:20px;
+    max-width:350px;
+    border-radius:15px;
+
+}
+
+
+.ticket h2{
+
+    color:#00e6ff;
+
+}
+
+
+a{
+
+color:gold;
+display:block;
+margin-top:30px;
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>
+🎟 My Tickets
+</h1>
+
+
+<input 
+id="phone"
+placeholder="2547XXXXXXXX"
+>
+
+
+<br>
+
+
+<button onclick="findTickets()">
+Search
+</button>
+
+
+
+<div id="result"></div>
+
+
+
+<a href="index.html">
+← Back to Home
+</a>
+
+
+
+
+
+<script>
+
+
+const API_URL =
+"https://raffle-site-x3qw.onrender.com";
+
+
+
+async function findTickets(){
+
+
+let phone =
+document.getElementById("phone").value;
+
+
+
+if(!phone){
+
+alert("Enter phone number");
+
+return;
+
+}
+
+
+
+let response =
+await fetch(
+`${API_URL}/my-tickets/${phone}`
+);
+
+
+
+let tickets =
+await response.json();
+
+
+
+let result =
+document.getElementById("result");
+
+
+
+if(tickets.length===0){
+
+result.innerHTML =
+
+`
+<div class="ticket">
+<h2>No tickets found</h2>
+<p>Make sure you use the same M-Pesa number.</p>
+</div>
+`;
+
+return;
+
+}
+
+
+
+
+result.innerHTML = tickets.map(t=>{
+
+
+return `
+
+<div class="ticket">
+
+<h2>
+🎫 Ticket ${t.ticketNumber}
+</h2>
+
+<p>
+Owner: ${t.name}
+</p>
+
+<p>
+Prize: ${t.product}
+</p>
+
+</div>
+
+`;
+
+
+
+}).join("");
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
