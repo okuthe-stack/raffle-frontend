@@ -16,6 +16,7 @@ body{
     margin:0;
 }
 
+
 h1{
     text-align:center;
     margin:20px 10px;
@@ -26,59 +27,97 @@ h1{
 }
 
 
-.container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:20px;
-    padding:20px;
+
+.nav-button{
+
+display:block;
+width:220px;
+margin:0 auto 20px;
+padding:12px;
+text-align:center;
+background:gold;
+color:black;
+font-weight:bold;
+border-radius:8px;
+text-decoration:none;
+
 }
+
+
+
+.container{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+padding:20px;
+
+}
+
 
 
 .card{
-    background:#121212;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 0 10px rgba(255,215,0,0.15);
-    transition:.3s;
+
+background:#121212;
+padding:15px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(255,215,0,0.15);
+transition:.3s;
+
 }
+
 
 
 .card:hover{
-    transform:scale(1.03);
+
+transform:scale(1.03);
+
 }
+
 
 
 img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:10px;
+
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+
 }
+
 
 
 .card h3{
-    color:#00e6ff;
+
+color:#00e6ff;
+margin:10px 0;
+
 }
+
 
 
 .card p{
-    color:#bbb;
+
+color:#bbb;
+
 }
+
 
 
 button{
 
-    margin-top:12px;
-    padding:12px;
-    width:100%;
-    border:none;
-    background:linear-gradient(45deg,gold,#ffcc00);
-    color:#000;
-    font-weight:bold;
-    border-radius:8px;
-    cursor:pointer;
+margin-top:12px;
+padding:12px;
+width:100%;
+border:none;
+background:linear-gradient(45deg,gold,#ffcc00);
+color:#000;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
 
 }
+
 
 
 .skeleton{
@@ -91,10 +130,13 @@ animation:pulse 1.5s infinite;
 }
 
 
+
 @keyframes pulse{
 
 50%{
+
 opacity:.5;
+
 }
 
 }
@@ -104,20 +146,27 @@ opacity:.5;
 @media(max-width:600px){
 
 h1{
+
 font-size:22px;
+
 }
 
 
 .card{
+
 padding:12px;
+
 }
 
 
 img{
+
 height:150px;
+
 }
 
 }
+
 
 </style>
 
@@ -132,14 +181,25 @@ Luxury Raffle Marketplace
 </h1>
 
 
+
+<a href="my-tickets.html" class="nav-button">
+🎟 My Tickets
+</a>
+
+
+
+
 <div class="container" id="products"></div>
+
+
 
 
 
 <script>
 
 
-const API_URL = "https://raffle-site-x3qw.onrender.com";
+const API_URL =
+"https://raffle-site-x3qw.onrender.com";
 
 
 
@@ -148,7 +208,8 @@ const API_URL = "https://raffle-site-x3qw.onrender.com";
 async function loadProducts(){
 
 
-const container=document.getElementById("products");
+const container =
+document.getElementById("products");
 
 
 
@@ -165,17 +226,20 @@ container.innerHTML=`
 try{
 
 
-const res = await fetch(
-`${API_URL}/products`
-);
+const res =
+await fetch(`${API_URL}/products`);
 
 
 
-const data = await res.json();
+const data =
+await res.json();
 
 
 
-container.innerHTML=data.map(p=>{
+
+container.innerHTML =
+data.map(p=>{
+
 
 
 const remaining =
@@ -191,23 +255,35 @@ return `
 <img src="${API_URL}${p.image}">
 
 
+
 <h3>
+
 ${p.name}
+
 </h3>
 
 
+
 <p>
+
 ${p.description}
+
 </p>
+
 
 
 <p>
+
 <b>KSh ${p.price}</b> per ticket
+
 </p>
+
 
 
 <p style="color:gold;">
+
 ${remaining} tickets left
+
 </p>
 
 
@@ -225,18 +301,18 @@ Buy Ticket
 `;
 
 
+
 }).join("");
 
 
 
 }
 
+
 catch(error){
 
 
-container.innerHTML=
-
-`
+container.innerHTML=`
 
 <h2>
 Unable to load products
@@ -248,7 +324,6 @@ Please try again later.
 
 `;
 
-
 console.log(error);
 
 
@@ -256,6 +331,7 @@ console.log(error);
 
 
 }
+
 
 
 
@@ -273,7 +349,11 @@ prompt("Enter your full name");
 
 
 
-if(!name)return;
+if(!name){
+
+return;
+
+}
 
 
 
@@ -284,7 +364,11 @@ prompt("Enter phone (2547XXXXXXXX)");
 
 
 
-if(!phone)return;
+if(!phone){
+
+return;
+
+}
 
 
 
@@ -295,7 +379,11 @@ prompt("How many tickets?");
 
 
 
-if(!quantity)return;
+if(!quantity){
+
+return;
+
+}
 
 
 
@@ -304,7 +392,9 @@ if(!quantity)return;
 try{
 
 
-const res = await fetch(
+
+const res =
+await fetch(
 
 `${API_URL}/mpesa/stkpush`,
 
@@ -339,8 +429,10 @@ quantity:Number(quantity)
 
 
 
+
 const data =
 await res.json();
+
 
 
 
@@ -374,7 +466,7 @@ alert(
 }
 
 
-catch(err){
+catch(error){
 
 
 alert(
@@ -384,7 +476,7 @@ alert(
 );
 
 
-console.log(err);
+console.log(error);
 
 
 }
@@ -392,6 +484,7 @@ console.log(err);
 
 
 }
+
 
 
 
